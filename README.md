@@ -28,7 +28,7 @@ A plugin for Obsidian that adds support for [Docusaurus-style admonitions](https
 ### Manual Installation
 
 1. Download the latest release (main.js, styles.css, manifest.json)
-2. Create a folder named obsidian-docusaurus-style-admonitions in your vault's .obsidian/plugins/ directory
+2. Create a folder named obsidian-docusaurus-style-admonitions-fuwari in your vault's .obsidian/plugins/ directory
 3. Copy the downloaded files into this folder
 4. Enable the plugin in Obsidian settings
 
