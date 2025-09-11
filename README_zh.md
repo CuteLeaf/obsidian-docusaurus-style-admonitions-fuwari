@@ -28,7 +28,7 @@
 ### 手动安装
 
 1. 下载最新版本文件（main.js、styles.css、manifest.json）
-2. 在您的库的 .obsidian/plugins/ 目录中创建名为 obsidian-docusaurus-style-admonitions 的文件夹
+2. 在您的库的 .obsidian/plugins/ 目录中创建名为 obsidian-docusaurus-style-admonitions-fuwari 的文件夹
 3. 将下载的文件复制到此文件夹中
 4. 在 Obsidian 设置中启用插件
 
