@@ -16,9 +16,9 @@ interface DocusaurusAdmonitionSettings {
 	enabledAdmonitions: {
 		note: boolean;
 		tip: boolean;
-		info: boolean;
+		important: boolean;
 		warning: boolean;
-		danger: boolean;
+		caution: boolean;
 	};
 }
 
@@ -27,17 +27,17 @@ interface DocusaurusAdmonitionSettings {
  * @property {Object} enabledAdmonitions - Object controlling which admonition types are enabled.
  * @property {boolean} enabledAdmonitions.note - Whether 'note' admonitions are enabled.
  * @property {boolean} enabledAdmonitions.tip - Whether 'tip' admonitions are enabled.
- * @property {boolean} enabledAdmonitions.info - Whether 'info' admonitions are enabled.
+ * @property {boolean} enabledAdmonitions.important - Whether 'important' admonitions are enabled.
  * @property {boolean} enabledAdmonitions.warning - Whether 'warning' admonitions are enabled.
- * @property {boolean} enabledAdmonitions.danger - Whether 'danger' admonitions are enabled.
+ * @property {boolean} enabledAdmonitions.caution - Whether 'caution' admonitions are enabled.
  */
 const DEFAULT_SETTINGS: DocusaurusAdmonitionSettings = {
 	enabledAdmonitions: {
 		note: true,
 		tip: true,
-		info: true,
+		important: true,
 		warning: true,
-		danger: true
+		caution: true
 	},
 };
 
@@ -46,7 +46,7 @@ const DEFAULT_SETTINGS: DocusaurusAdmonitionSettings = {
  * 
  * This plugin enables the use of :::type syntax to create formatted admonition 
  * blocks in both reading and live preview modes. Supported admonition types include:
- * note, tip, info, warning, and danger.
+ * note, tip, important, warning, and caution.
  * 
  * Admonitions can be used in two formats:
  * 1. Single-line: :::type Content here :::
@@ -96,7 +96,7 @@ export default class DocusaurusAdmonitionsPlugin extends Plugin {
 	 * - Multi-line: :::type (content paragraphs) :::
 	 * - Multi-line with custom title: :::type [Custom Title] (content paragraphs) :::
 	 * 
-	 * Supported admonition types: note, tip, info, warning, and danger.
+	 * Supported admonition types: note, tip, important, warning, and caution.
 	 * Admonitions will only be rendered if they are enabled in the plugin settings.
 	 * 
 	 * @param el - The HTML element containing paragraphs to process
@@ -109,15 +109,51 @@ export default class DocusaurusAdmonitionsPlugin extends Plugin {
 		for (let i = 0; i < paragraphs.length; i++) {
 			const p = paragraphs[i];
 			const text = p.textContent?.trim();
-			if (!text || !text.startsWith(':::')) continue;
+			if (!text) continue;
 
-			// Determine type
-			const match = text.match(/^:::(note|tip|info|warning|danger)(?:\s|$)/);
-			if (!match) continue;
+			// Skip if this paragraph is inside a code block
+			if (this.isInsideCodeBlock(p)) {
+				continue;
+			}
 
-			// Single line admonition - unterstützt nun auch benutzerdefinierte Titel
+			// Check for GitHub syntax first: > [!TYPE]
+			const githubMatch = text.match(/^>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
+			if (githubMatch) {
+				const githubType = githubMatch[1].toLowerCase();
+				
+				if (!this.settings.enabledAdmonitions[githubType as keyof DocusaurusAdmonitionSettings['enabledAdmonitions']]) {
+					continue;
+				}
+
+				// Process GitHub-style admonition
+				let content = text.replace(/^>\s*\[![^\]]+\]\s*/, '').trim();
+				const admonitionDiv = document.createElement('div');
+				admonitionDiv.className = `docusaurus-admonition docusaurus-admonition-${githubType}`;
+				
+				const titleDiv = document.createElement('div');
+				titleDiv.className = 'docusaurus-admonition-title';
+				titleDiv.textContent = githubType.toUpperCase();
+				admonitionDiv.appendChild(titleDiv);
+				
+				const contentDiv = document.createElement('div');
+				contentDiv.className = 'docusaurus-admonition-content';
+				if (content) {
+					contentDiv.textContent = content;
+				}
+				admonitionDiv.appendChild(contentDiv);
+				
+				p.replaceWith(admonitionDiv);
+				continue;
+			}
+
+			// Check for standard :::type syntax
+			if (!text.startsWith(':::')) continue;
+
+		// Determine type
+		const match = text.match(/^:::(note|tip|important|warning|caution)(?:\s|$)/);
+		if (!match) continue;			// Single line admonition - unterstützt nun auch benutzerdefinierte Titel
 			// Syntax: :::type [Custom Title] Content :::
-			const singleLineMatch = text.match(/^:::(note|tip|info|warning|danger)(?:\s+\[(.*?)\])?\s+([\s\S]+?)\s+:::$/);
+			const singleLineMatch = text.match(/^:::(note|tip|important|warning|caution)(?:\s*\[(.*?)\])?\s+([\s\S]+?)\s+:::$/);
 			if (singleLineMatch) {
 				const singleType = singleLineMatch[1];
 				const customTitle = singleLineMatch[2];
@@ -127,27 +163,28 @@ export default class DocusaurusAdmonitionsPlugin extends Plugin {
 					continue;
 				}
 
-				const admonitionDiv = el.createDiv({
-					cls: ['docusaurus-admonition', `docusaurus-admonition-${singleType}`]
-				});
-				admonitionDiv.createDiv({
-					cls: 'docusaurus-admonition-title',
-					text: customTitle || singleType.toUpperCase()
-				});
-				const contentDiv = admonitionDiv.createDiv({ cls: 'docusaurus-admonition-content' });
-				await MarkdownRenderer.render(this.app, content, contentDiv, ctx.sourcePath, this);
+				const admonitionDiv = document.createElement('div');
+				admonitionDiv.className = `docusaurus-admonition docusaurus-admonition-${singleType}`;
+				
+				const titleDiv = document.createElement('div');
+				titleDiv.className = 'docusaurus-admonition-title';
+				titleDiv.textContent = customTitle || singleType.toUpperCase();
+				admonitionDiv.appendChild(titleDiv);
+				
+				const contentDiv = document.createElement('div');
+				contentDiv.className = 'docusaurus-admonition-content';
+				contentDiv.textContent = content;
+				admonitionDiv.appendChild(contentDiv);
 				p.replaceWith(admonitionDiv);
 				continue;
 			}
 
-			// Multi-line admonition - unterstützt nun auch benutzerdefinierte Titel
-			// Syntax: :::type [Custom Title]
-			//         Content
-			//         :::
-			const multiLineMatch = text.match(/^:::(note|tip|info|warning|danger)(?:\s+\[(.*?)\])?$/);
-			if (!multiLineMatch) continue;
-
-			const multiType = multiLineMatch[1];
+		// Multi-line admonition - unterstützt nun auch benutzerdefinierte Titel
+		// Syntax: :::type [Custom Title]
+		//         Content
+		//         :::
+		const multiLineMatch = text.match(/^:::(note|tip|important|warning|caution)(?:\s*\[(.*?)\])?$/);
+		if (!multiLineMatch) continue;			const multiType = multiLineMatch[1];
 			const customTitle = multiLineMatch[2];
 
 			let endIndex = -1;
@@ -168,24 +205,47 @@ export default class DocusaurusAdmonitionsPlugin extends Plugin {
 			}
 
 			// Build container
-			const admonitionDiv = el.createDiv({
-				cls: ['docusaurus-admonition', `docusaurus-admonition-${multiType}`]
-			});
-			admonitionDiv.createDiv({
-				cls: 'docusaurus-admonition-title',
-				text: customTitle || multiType.toUpperCase()
-			});
-			const contentDiv = admonitionDiv.createDiv({ cls: 'docusaurus-admonition-content' });
+			const admonitionDiv = document.createElement('div');
+			admonitionDiv.className = `docusaurus-admonition docusaurus-admonition-${multiType}`;
+			
+			const titleDiv = document.createElement('div');
+			titleDiv.className = 'docusaurus-admonition-title';
+			titleDiv.textContent = customTitle || multiType.toUpperCase();
+			admonitionDiv.appendChild(titleDiv);
+			
+			const contentDiv = document.createElement('div');
+			contentDiv.className = 'docusaurus-admonition-content';
 
 			for (let k = 0; k < content.length; k++) {
 				contentDiv.appendChild(content[k].cloneNode(true));
 			}
+			admonitionDiv.appendChild(contentDiv);
 
 			p.replaceWith(admonitionDiv);
 			content.forEach(el => el.remove());
 			paragraphs[endIndex].remove();
 			i = endIndex;
 		}
+	}
+
+	/** Check if an element is inside a code block */
+	private isInsideCodeBlock(element: HTMLElement): boolean {
+		// Check if the element or any of its parents is a code block
+		let current: HTMLElement | null = element;
+		while (current) {
+			// Check for common code block classes and tags
+			if (current.tagName === 'CODE' || 
+				current.tagName === 'PRE' ||
+				current.classList.contains('language-') ||
+				current.classList.contains('hljs') ||
+				current.classList.contains('cm-line') ||
+				current.closest('pre') ||
+				current.closest('code')) {
+				return true;
+			}
+			current = current.parentElement;
+		}
+		return false;
 	}
 
 	/** Registers Post-Processor & CodeMirror decorations for Live Preview. */
@@ -237,7 +297,7 @@ class DocusaurusAdmonitionsSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		const desc = 'Enables :::SYNTAX admonition';
-		const types = ['note', 'tip', 'info', 'warning', 'danger'] as const;
+		const types = ['note', 'tip', 'important', 'warning', 'caution'] as const;
 
 		types.forEach(type => {
 			new Setting(containerEl)
@@ -281,7 +341,7 @@ function createAdmonitionViewPlugin(settings: DocusaurusAdmonitionSettings) {
 
 /** Creates a DecorationSet that highlights start/end lines and content in Edit Mode. */
 function computeAdmonitionDecorations(view: EditorView, settings: DocusaurusAdmonitionSettings): DecorationSet {
-	const types = ['note', 'tip', 'info', 'warning', 'danger'];
+	const types = ['note', 'tip', 'important', 'warning', 'caution'];
 	const decorations: Range<Decoration>[] = [];
 	const doc = view.state.doc;
 
@@ -289,6 +349,12 @@ function computeAdmonitionDecorations(view: EditorView, settings: DocusaurusAdmo
 	while (pos < doc.length) {
 		const line = doc.lineAt(pos);
 		const text = line.text;
+
+		// Skip if we're inside a code block
+		if (isInsideCodeBlockInEditor(view, line.from)) {
+			pos = line.to + 1;
+			continue;
+		}
 
 		// Check for admonition start (e.g., :::note or :::note [Custom Title])
 		for (const t of types) {
@@ -298,7 +364,7 @@ function computeAdmonitionDecorations(view: EditorView, settings: DocusaurusAdmo
 			}
 
 			// Überprüfe auf Startzeilen mit oder ohne benutzerdefinierten Titel
-			const startRegex = new RegExp(`^:::${t}(?:\\s+\\[.*?\\])?(?:\\s|$)`);
+			const startRegex = new RegExp(`^:::${t}(?:\\s*\\[.*?\\])?(?:\\s|$)`);
 			if (startRegex.test(text)) {
 				// Start line
 				decorations.push(
@@ -337,4 +403,43 @@ function computeAdmonitionDecorations(view: EditorView, settings: DocusaurusAdmo
 		pos = line.to + 1;
 	}
 	return Decoration.set(decorations, true);
+}
+
+/** Check if a position is inside a code block in the editor */
+function isInsideCodeBlockInEditor(view: EditorView, pos: number): boolean {
+	const state = view.state;
+	const doc = state.doc;
+	
+	// Get the line containing this position
+	const line = doc.lineAt(pos);
+	const lineText = line.text;
+	
+	// Simple heuristic: check if line starts with indentation (4+ spaces or tab)
+	// or if it's part of a fenced code block
+	if (lineText.match(/^(\s{4,}|\t)/)) {
+		return true;
+	}
+	
+	// Check for fenced code blocks by looking backwards for opening ```
+	let currentPos = line.from;
+	let inCodeBlock = false;
+	
+	// Scan backwards to check for code block boundaries
+	for (let lineNum = line.number - 1; lineNum >= 1; lineNum--) {
+		const checkLine = doc.line(lineNum);
+		const checkText = checkLine.text;
+		
+		// If we find a closing ```, we're not in a code block
+		if (checkText.match(/^```\s*$/)) {
+			break;
+		}
+		
+		// If we find an opening ```, we're in a code block
+		if (checkText.match(/^```\w*/)) {
+			inCodeBlock = true;
+			break;
+		}
+	}
+	
+	return inCodeBlock;
 }

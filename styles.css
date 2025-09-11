@@ -28,8 +28,10 @@
 
 .docusaurus-admonition-note::before { background-color: var(--callout-info-color, #3578e5); }
 .docusaurus-admonition-tip::before { background-color: var(--callout-tip-color, #00a400); }
-.docusaurus-admonition-info::before { background-color: var(--callout-info-color, #3578e5); }
+.docusaurus-admonition-important::before { background-color: var(--callout-important-color, #8b5cf6); }
 .docusaurus-admonition-warning::before { background-color: var(--callout-warning-color, #e6a700); }
+.docusaurus-admonition-caution::before { background-color: var(--callout-error-color, #fa383e); }
+.docusaurus-admonition-info::before { background-color: var(--callout-info-color, #3578e5); }
 .docusaurus-admonition-danger::before { background-color: var(--callout-error-color, #fa383e); }
 
 /* Titel mit Icons und Farben */
@@ -70,9 +72,19 @@
     color: var(--callout-tip-color, #00a400);
 }
 
+/* Icon für IMPORTANT */
+.docusaurus-admonition-important .docusaurus-admonition-title {
+    color: var(--callout-important-color, #8b5cf6);
+}
+
 /* Icon für WARNING */
 .docusaurus-admonition-warning .docusaurus-admonition-title {
     color: var(--callout-warning-color, #e6a700);
+}
+
+/* Icon für CAUTION */
+.docusaurus-admonition-caution .docusaurus-admonition-title {
+    color: var(--callout-error-color, #fa383e);
 }
 
 /* Icon für DANGER */
@@ -87,7 +99,12 @@
 
 /* Icon für TIP (Lightbulb) */
 .docusaurus-admonition-tip .docusaurus-admonition-title::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'%3E%3Cpath fill='%2300a400' d='M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7L272 415.1h-160L112.1 454.3zM191.4 .0132C89.44 .3257 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8c16.53 18.84 42.34 58.23 52.22 91.45c.0313 .25 .0938 .5166 .125 .7823h160.2c.0313-.2656 .0938-.5166 .125-.7823c9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1C368 78.61 288.9 .0132 191.4 .0132zM192 96.01c-44.13 0-80 35.89-80 79.1C112 184.8 104.8 192 96 192S80 184.8 80 176c0-61.76 50.25-111.1 112-111.1c8.844 0 16 7.159 16 16S200.8 96.01 192 96.01z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill='%2300a400' d='M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* Icon für IMPORTANT (Message) */
+.docusaurus-admonition-important .docusaurus-admonition-title::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill='%238b5cf6' d='M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 /* Icon für INFO (Info Circle) - gleich wie NOTE */
@@ -97,7 +114,12 @@
 
 /* Icon für WARNING (Exclamation Triangle) */
 .docusaurus-admonition-warning .docusaurus-admonition-title::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23e6a700' d='M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-24 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill='%23e6a700' d='M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+/* Icon für CAUTION (Octagon) */
+.docusaurus-admonition-caution .docusaurus-admonition-title::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill='%23fa383e' d='M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 /* Icon für DANGER (Exclamation Circle) */
@@ -114,8 +136,10 @@
 /* Allgemeine Styles für Admonition-Zeilen */
 .admonition-note-start, .admonition-note-end, .admonition-note-content,
 .admonition-tip-start, .admonition-tip-end, .admonition-tip-content,
-.admonition-info-start, .admonition-info-end, .admonition-info-content,
+.admonition-important-start, .admonition-important-end, .admonition-important-content,
 .admonition-warning-start, .admonition-warning-end, .admonition-warning-content,
+.admonition-caution-start, .admonition-caution-end, .admonition-caution-content,
+.admonition-info-start, .admonition-info-end, .admonition-info-content,
 .admonition-danger-start, .admonition-danger-end, .admonition-danger-content {
     padding-left: 20px !important; /* Erhöhter Abstand für alle Admonition-Zeilen */
     position: relative;
@@ -131,10 +155,15 @@
     background-color: var(--callout-tip-background, rgba(0, 164, 0, 0.05));
 }
 
+.admonition-important-start, .admonition-important-end, .admonition-important-content {
+    background-color: var(--callout-important-background, rgba(139, 92, 246, 0.05));
+}
+
 .admonition-warning-start, .admonition-warning-end, .admonition-warning-content {
     background-color: var(--callout-warning-background, rgba(230, 167, 0, 0.05));
 }
 
+.admonition-caution-start, .admonition-caution-end, .admonition-caution-content,
 .admonition-danger-start, .admonition-danger-end, .admonition-danger-content {
     background-color: var(--callout-error-background, rgba(250, 56, 62, 0.05));
 }
@@ -142,8 +171,10 @@
 /* Linien an der Seite für jeden Typ */
 .admonition-note-start::before, .admonition-note-end::before, .admonition-note-content::before,
 .admonition-tip-start::before, .admonition-tip-end::before, .admonition-tip-content::before,
-.admonition-info-start::before, .admonition-info-end::before, .admonition-info-content::before,
+.admonition-important-start::before, .admonition-important-end::before, .admonition-important-content::before,
 .admonition-warning-start::before, .admonition-warning-end::before, .admonition-warning-content::before,
+.admonition-caution-start::before, .admonition-caution-end::before, .admonition-caution-content::before,
+.admonition-info-start::before, .admonition-info-end::before, .admonition-info-content::before,
 .admonition-danger-start::before, .admonition-danger-end::before, .admonition-danger-content::before {
     content: '';
     position: absolute;
@@ -162,10 +193,15 @@
     background-color: var(--callout-tip-color, #00a400);
 }
 
+.admonition-important-start::before, .admonition-important-end::before, .admonition-important-content::before {
+    background-color: var(--callout-important-color, #8b5cf6);
+}
+
 .admonition-warning-start::before, .admonition-warning-end::before, .admonition-warning-content::before {
     background-color: var(--callout-warning-color, #e6a700);
 }
 
+.admonition-caution-start::before, .admonition-caution-end::before, .admonition-caution-content::before,
 .admonition-danger-start::before, .admonition-danger-end::before, .admonition-danger-content::before {
     background-color: var(--callout-error-color, #fa383e);
 }
@@ -200,7 +236,25 @@
     color: var(--callout-tip-color, #00a400) !important;
     padding-left: 44px !important; /* Mehr Platz für das Icon */
     position: relative; /* Notwendig für die absolute Positionierung */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512' width='16' height='16'%3E%3Cpath fill='%2300a400' d='M112.1 454.3c0 6.297 1.816 12.44 5.284 17.69l17.14 25.69c5.25 7.875 17.17 14.28 26.64 14.28h61.67c9.438 0 21.36-6.401 26.61-14.28l17.08-25.68c2.938-4.438 5.348-12.37 5.348-17.7L272 415.1h-160L112.1 454.3zM191.4 .0132C89.44 .3257 16 82.97 16 175.1c0 44.38 16.44 84.84 43.56 115.8c16.53 18.84 42.34 58.23 52.22 91.45c.0313 .25 .0938 .5166 .125 .7823h160.2c.0313-.2656 .0938-.5166 .125-.7823c9.875-33.22 35.69-72.61 52.22-91.45C351.6 260.8 368 220.4 368 175.1C368 78.61 288.9 .0132 191.4 .0132zM192 96.01c-44.13 0-80 35.89-80 79.1C112 184.8 104.8 192 96 192S80 184.8 80 176c0-61.76 50.25-111.1 112-111.1c8.844 0 16 7.159 16 16S200.8 96.01 192 96.01z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill='%2300a400' d='M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 20px center !important; /* Icon-Position anpassen */
+    background-size: 16px;
+}
+
+/* Important Style mit Icon */
+.admonition-important-start, .admonition-important-end, .admonition-important-content {
+    background-color: var(--callout-important-background, rgba(139, 92, 246, 0.05));
+}
+.admonition-important-start::before, .admonition-important-end::before, .admonition-important-content::before {
+    background-color: var(--callout-important-color, #8b5cf6);
+}
+.admonition-important-start {
+    font-weight: bold;
+    color: var(--callout-important-color, #8b5cf6) !important;
+    padding-left: 44px !important; /* Mehr Platz für das Icon */
+    position: relative; /* Notwendig für die absolute Positionierung */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill='%238b5cf6' d='M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z'%3E%3C/path%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: 20px center !important; /* Icon-Position anpassen */
     background-size: 16px;
@@ -236,7 +290,25 @@
     color: var(--callout-warning-color, #e6a700) !important;
     padding-left: 44px !important; /* Mehr Platz für das Icon */
     position: relative; /* Notwendig für die absolute Positionierung */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' width='16' height='16'%3E%3Cpath fill='%23e6a700' d='M506.3 417l-213.3-364c-16.33-28-57.54-28-73.98 0l-213.2 364C-10.59 444.9 9.849 480 42.74 480h426.6C502.1 480 522.6 445 506.3 417zM232 168c0-13.25 10.75-24 24-24S280 154.8 280 168v128c0 13.25-10.75 24-24 24S232 309.3 232 296V168zM256 416c-17.36 0-31.44-14.08-31.44-31.44c0-17.36 14.07-31.44 31.44-31.44s31.44 14.08 31.44 31.44C287.4 401.9 273.4 416 256 416z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill='%23e6a700' d='M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 20px center !important; /* Icon-Position anpassen */
+    background-size: 16px;
+}
+
+/* Caution Style mit Icon */
+.admonition-caution-start, .admonition-caution-end, .admonition-caution-content {
+    background-color: var(--callout-error-background, rgba(250, 56, 62, 0.05));
+}
+.admonition-caution-start::before, .admonition-caution-end::before, .admonition-caution-content::before {
+    background-color: var(--callout-error-color, #fa383e);
+}
+.admonition-caution-start {
+    font-weight: bold;
+    color: var(--callout-error-color, #fa383e) !important;
+    padding-left: 44px !important; /* Mehr Platz für das Icon */
+    position: relative; /* Notwendig für die absolute Positionierung */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill='%23fa383e' d='M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z'%3E%3C/path%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: 20px center !important; /* Icon-Position anpassen */
     background-size: 16px;
@@ -274,15 +346,27 @@
     font-weight: bold;
 }
 
-.cm-line:has(.cm-string:contains(':::info')) {
-    color: var(--callout-info-color, #3578e5);
-    border-left: 3px solid var(--callout-info-color, #3578e5);
+.cm-line:has(.cm-string:contains(':::important')) {
+    color: var(--callout-important-color, #8b5cf6);
+    border-left: 3px solid var(--callout-important-color, #8b5cf6);
     font-weight: bold;
 }
 
 .cm-line:has(.cm-string:contains(':::warning')) {
     color: var(--callout-warning-color, #e6a700);
     border-left: 3px solid var(--callout-warning-color, #e6a700);
+    font-weight: bold;
+}
+
+.cm-line:has(.cm-string:contains(':::caution')) {
+    color: var(--callout-error-color, #fa383e);
+    border-left: 3px solid var(--callout-error-color, #fa383e);
+    font-weight: bold;
+}
+
+.cm-line:has(.cm-string:contains(':::info')) {
+    color: var(--callout-info-color, #3578e5);
+    border-left: 3px solid var(--callout-info-color, #3578e5);
     font-weight: bold;
 }
 

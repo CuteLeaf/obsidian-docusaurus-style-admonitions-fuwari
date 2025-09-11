@@ -1,14 +1,20 @@
-# Docusaurus Style Admonitions for Obsidian
+# Docusaurus Style Admonitions for Obsidian (Fuwari Adapted)
 
-A plugin for Obsidian that adds support for [Docusaurus-style admonitions](https://docusaurus.io/docs/markdown-features/admonitions). This plugin allows you to create stylish, colored callout boxes with icons for different types of information. This is especially useful, if you manage your Docusaurus content as an Obsidian Vault.
+A plugin for Obsidian that adds support for [Docusaurus-style admonitions](https://docusaurus.io/docs/markdown-features/admonitions). This plugin allows you to create stylish, colored callout boxes with icons for different types of information. 
+
+**This version has been specially adapted for the [Fuwari blog template](https://github.com/saicaca/fuwari)** to ensure seamless compatibility between Obsidian notes and Fuwari blog posts. This is especially useful if you manage your Fuwari blog content as an Obsidian Vault and want consistent admonition styling across both platforms.
+
+[中文文档](./README_zh.md) | [English Documentation](./README.md)
 
 ## Features
 
-- Supports five admonition types: note, tip, info, warning, and danger
+- Supports five admonition types: note, tip, important, warning, and caution
+- GitHub-style admonition syntax support (> [!NOTE], > [!TIP], etc.)
 - Works in both Reading Mode and Live Preview (Edit Mode)
 - Custom styling with attractive icons and color-coding
 - Full compatibility with Obsidian themes
 - Flexible syntax options
+- Custom titles support
 
 ## Installation
 
@@ -16,7 +22,7 @@ A plugin for Obsidian that adds support for [Docusaurus-style admonitions](https
 
 1. Open Obsidian Settings
 2. Navigate to Community Plugins
-3. Click "Browse" and search for "Docusaurus Style Admonitions"
+3. Click "Browse" and search for "Docusaurus Style Admonitions Fuwari"
 4. Install the plugin and enable it
 
 ### Manual Installation
@@ -39,34 +45,56 @@ This is a note
 Here's a useful tip!
 :::
 
-:::info
-Important information
+:::important
+This is very important information
 :::
 
 :::warning
 Be careful with this
 :::
 
-:::danger
+:::caution
 This is a dangerous action!
 :::
-````
+```
 
-You can include titles like this:
+### Custom Titles
 
-:::info [Title]
-This is an info element with title
+You can include custom titles like this:
+
+```text
+:::note[My Custom Title]
+This is a note with a custom title
 :::
+```
 
+### GitHub-Style Syntax
+
+The plugin also supports GitHub-style admonition syntax:
+
+```text
+> [!NOTE]
+> This is a GitHub-style note
+
+> [!TIP]
+> Here's a GitHub-style tip
+
+> [!IMPORTANT]
+> This is important GitHub-style information
+
+> [!WARNING]
+> This is a GitHub-style warning
+
+> [!CAUTION]
+> This is a GitHub-style caution
+```
 
 ## Configuration
 
 The plugin settings allow you to:
 
-1. Enable or disable specific admonition types
-2. Enable code block syntax (not enabled by default)
-	- This option allows using Markdown code blocks for admonitions (````note`)
-	- Note that this syntax is **not Docusaurus-compatible**
+1. Enable or disable specific admonition types (note, tip, important, warning, caution)
+2. Each admonition type can be individually toggled on or off
 
 ## Compatibility
 
@@ -75,13 +103,22 @@ The plugin settings allow you to:
 
 ## Support
 
-If you encounter any issues or have suggestions, please file an issue on the [GitHub repository](https://github.com/rwbr/obsidian-docusaurus-style-admonitions).
+If you encounter any issues or have suggestions for this Fuwari-adapted version, please file an issue on the [GitHub repository](https://github.com/CuteLeaf/obsidian-docusaurus-style-admonitions).
+
+For the original plugin, please visit the [original repository](https://github.com/rwbr/obsidian-docusaurus-style-admonitions).
 
 ## License
 
 This project is licensed under the MIT License.
 
+## Acknowledgments
+
+This plugin is based on the original [Docusaurus Style Admonitions](https://github.com/rwbr/obsidian-docusaurus-style-admonitions) by [Ralf Weinbrecher](https://github.com/rwbr). Special thanks to the original author for creating this excellent foundation.
+
+This adapted version has been specifically modified for compatibility with the [Fuwari blog template](https://github.com/saicaca/fuwari) to provide seamless admonition styling between Obsidian and Fuwari blog posts.
+
 ## Author
 
-Created by [Ralf Weinbrecher](https://github.com/rwbr)
+Adapted for Fuwari by [CuteLeaf](https://github.com/CuteLeaf)
+Original plugin by [Ralf Weinbrecher](https://github.com/rwbr)
 
