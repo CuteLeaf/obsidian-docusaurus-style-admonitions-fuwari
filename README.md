@@ -78,15 +78,6 @@ The plugin also supports GitHub-style admonition syntax:
 
 > [!TIP]
 > Here's a GitHub-style tip
-
-> [!IMPORTANT]
-> This is important GitHub-style information
-
-> [!WARNING]
-> This is a GitHub-style warning
-
-> [!CAUTION]
-> This is a GitHub-style caution
 ```
 
 ## Configuration
