@@ -149,9 +149,7 @@ export default class DocusaurusAdmonitionsPlugin extends Plugin {
 			// Check for standard :::type syntax
 			if (!text.startsWith(':::')) continue;
 
-		// Determine type
-		const match = text.match(/^:::(note|tip|important|warning|caution)(?:\s|$)/);
-		if (!match) continue;			// Single line admonition - unterstützt nun auch benutzerdefinierte Titel
+			// Single line admonition - supports custom titles
 			// Syntax: :::type [Custom Title] Content :::
 			const singleLineMatch = text.match(/^:::(note|tip|important|warning|caution)(?:\s*\[(.*?)\])?\s+([\s\S]+?)\s+:::$/);
 			if (singleLineMatch) {
@@ -179,12 +177,14 @@ export default class DocusaurusAdmonitionsPlugin extends Plugin {
 				continue;
 			}
 
-		// Multi-line admonition - unterstützt nun auch benutzerdefinierte Titel
-		// Syntax: :::type [Custom Title]
-		//         Content
-		//         :::
-		const multiLineMatch = text.match(/^:::(note|tip|important|warning|caution)(?:\s*\[(.*?)\])?$/);
-		if (!multiLineMatch) continue;			const multiType = multiLineMatch[1];
+			// Multi-line admonition - supports custom titles
+			// Syntax: :::type [Custom Title]
+			//         Content
+			//         :::
+			const multiLineMatch = text.match(/^:::(note|tip|important|warning|caution)(?:\s*\[(.*?)\])?$/);
+			if (!multiLineMatch) continue;
+			
+			const multiType = multiLineMatch[1];
 			const customTitle = multiLineMatch[2];
 
 			let endIndex = -1;

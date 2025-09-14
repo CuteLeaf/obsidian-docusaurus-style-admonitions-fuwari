@@ -1,6 +1,6 @@
 {
 	"name": "docusaurus-style-admonitions-fuwari",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Adds Docusaurus style admonitions with support for note, tip, important, warning, and caution types",
 	"main": "main.js",
 	"scripts": {
