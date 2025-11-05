@@ -75,7 +75,7 @@ export default class DocusaurusAdmonitionsPlugin extends Plugin {
 
 		// 2. Register Markdown post processor (nur einmal)
 		this.registerMarkdownPostProcessor((el, ctx) => {
-			this.processCustomAdmonitionSyntax(el, ctx);
+			void this.processCustomAdmonitionSyntax(el, ctx);
 		});
 
 		// 3. Initialisiere Live Preview-Unterstützung
@@ -226,6 +226,9 @@ export default class DocusaurusAdmonitionsPlugin extends Plugin {
 			paragraphs[endIndex].remove();
 			i = endIndex;
 		}
+		
+		// Ensure async behavior for proper promise handling
+		await Promise.resolve();
 	}
 
 	/** Check if an element is inside a code block */
